@@ -82,9 +82,13 @@ class Company {
     calculateTotalPayroll()  {
         return this.employees.reduce((total, employee) => total + employee.calculateAnnualSalary(), 0);
      }
-    }
-      //Task 4 - returns the sum of all employee salaries (including managers)
     
+      //**********Task 5 - Implemented Promotion System **********/
+    promoteToManager (employee, teamSize) { 
+        const index = this.employees.indexOf(employee); 
+        this.employees[index] = new Manager(employee.name, employee.id, employee.department, employee.salary, teamSize); 
+    }
+}
 
 //Test Data
 const company = new Company("TechCorp");
@@ -95,7 +99,16 @@ company.listEmployees();
 // "Employee: Alice Johnson, ID: 101, Department: Sales, Salary: $5000"
 // "Manager: John Smith, ID: 201, Department: IT, Salary: $8000, Team Size: 5"
 
+
+
 //Task 4 - Implemented Payroll System
 //Test Data
 console.log(company.calculateTotalPayroll()); 
 // Expected output: 165600 (assuming emp1 and mgr1 salaries)
+
+
+//Task 5 - Implemented Promotion System
+//Test Data 
+company.promoteToManager(emp1, 3);
+company.listEmployees();
+// Expected output: "Manager: Alice Johnson, ID: 101, Department: Sales, Salary: $5000, Team Size: 3"
