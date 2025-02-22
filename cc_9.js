@@ -44,7 +44,9 @@ getDetails() {
   calculateBonus() {
     return super.calculateAnnualSalary() * 0.10;
   };
+ //******** Task 4 Modifying calculateAnnualSalary**********
   calculateAnnualSalary() { 
+    //Returning employee's annual salary + calculateBonus method
     return super.calculateAnnualSalary() + this.calculateBonus(); };
 }
 
@@ -72,8 +74,17 @@ class Company {
     //Setting up listEmployees method
     listEmployees() { 
     //Using forEach loop to run through the employees array and log each employee's details.
-        this.employees.forEach(employee => {console.log(employee.getDetails())}); 
-    }}
+        this.employees.forEach(employee => {console.log(employee.getDetails());
+        }); 
+    }
+    // **********Task 4 - Implemented Payroll System**********
+    //Creating a calculateTotalPayroll method to calculate the total payroll of all employees.
+    calculateTotalPayroll()  {
+        return this.employees.reduce((total, employee) => total + employee.calculateAnnualSalary(), 0);
+     }
+    }
+      //Task 4 - returns the sum of all employee salaries (including managers)
+    
 
 //Test Data
 const company = new Company("TechCorp");
@@ -83,3 +94,8 @@ company.listEmployees();
 // Expected output:
 // "Employee: Alice Johnson, ID: 101, Department: Sales, Salary: $5000"
 // "Manager: John Smith, ID: 201, Department: IT, Salary: $8000, Team Size: 5"
+
+//Task 4 - Implemented Payroll System
+//Test Data
+console.log(company.calculateTotalPayroll()); 
+// Expected output: 165600 (assuming emp1 and mgr1 salaries)
